@@ -26,11 +26,9 @@ dependencies: [
 
 ### Edges
 
-Attaching a view to its superview with `NSLayoutConstraint`:
+Pinning view's edges to its superview with `NSLayoutConstraint`:
 
 ```swift
-view.translatesAutoresizingMaskIntoConstraints = false
-superview.addSubview(view)
 NSLayoutConstraint.activate([
     view.topAnchor.constraint(equalTo: superview.topAnchor, constant: 0),
     view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 0),
@@ -42,7 +40,7 @@ NSLayoutConstraint.activate([
 with `HSLayout`:
 
 ```swift
-superview.addSubview(view, layout: .fit())
+view.constraints(to: superview, layout: .fit())
 ```
 
 ### Center
@@ -60,4 +58,42 @@ with `HSLayout`:
 
 ```swift
 view.constraints(to: superview, layout: .center)
+```
+
+### Alignment
+
+Aligning the view to its superview with `NSLayoutConstraint`:
+
+```swift
+NSLayoutConstraint.activate([
+    view.topAnchor.constraint(equalTo: superview.topAnchor, constant: 20),
+    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 20),
+])
+```
+
+with `HSLayout`:
+
+```swift
+view.constraints(to: superview, layout: .alignment(.topLeading, offset: .init(x: 20, y: 20)))
+```
+
+### Add SubView With Layouts
+
+Adding subview and constraining to its superview with `NSLayoutConstraint`:
+
+```swift
+view.translatesAutoresizingMaskIntoConstraints = false
+superview.addSubview(view)
+NSLayoutConstraint.activate([
+    view.topAnchor.constraint(equalTo: superview.topAnchor, constant: 0),
+    view.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 0),
+    view.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: 0),
+    view.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: 0)
+])
+```
+
+with `HSLayout`:
+
+```swift
+superview.addSubview(view, layout: .fit())
 ```
