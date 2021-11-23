@@ -18,7 +18,7 @@ If you want to use HSLayout in a [SwiftPM](https://swift.org/package-manager/) p
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/Hsieh-1989/HSLayout.git", from: "0.1.0")
+    .package(url: "https://github.com/Hsieh-1989/HSLayout.git", from: "0.1.1")
 ]
 ```
 
