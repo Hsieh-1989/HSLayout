@@ -97,3 +97,38 @@ with `HSLayout`:
 ```swift
 superview.addSubview(view, layout: .fit())
 ```
+
+### Customized Reusable & Composable Layouts!
+
+It's easy to make reusable layout units then make a complex layout with composition:
+
+```swift
+// making the view center to its superview and never beyond parent's edge with preferred size.
+superview.addSubview(view, layout: .insideCenter(preferredSize: CGSize(width: 500, height: 500)))
+
+extension HSLayout {
+    static func insideCenter(preferredSize: CGSize, margin: UIEdgeInsets = .zero) -> HSLayout {
+        .concat(
+            .center,
+            .inside(margin: margin),
+            .preferredSize(preferredSize)
+        )
+    }
+    
+    static func inside(margin: UIEdgeInsets = .zero) -> HSLayout {
+        .concat(
+            .constraint(\.topAnchor, relation: .greaterThanOrEqual, constant: margin.top),
+            .constraint(\.leadingAnchor, relation: .greaterThanOrEqual, constant: margin.left),
+            .constraint(\.trailingAnchor, relation: .lessThanOrEqual, constant: -margin.right),
+            .constraint(\.bottomAnchor, relation: .lessThanOrEqual, constant: -margin.bottom)
+        )
+    }
+    
+    static func preferredSize(_ size: CGSize) -> HSLayout {
+        .concat(
+            .constant(\.widthAnchor, value: size.width, priority: .fittingSizeLevel),
+            .constant(\.heightAnchor, value: size.height, priority: .fittingSizeLevel)
+        )
+    }
+}
+```
