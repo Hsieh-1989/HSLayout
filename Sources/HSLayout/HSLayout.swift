@@ -25,7 +25,7 @@ extension HSLayout {
     ///   - view: the target view you want to constraint to
     ///   - layout: layout used to constraint original view to the providing view
     /// - Returns: Layout that constraint to the tartget view
-    public static func constraint(to view: UIView, layout: HSLayout) -> HSLayout {
+    public static func constraint(to view: View, layout: HSLayout) -> HSLayout {
         layout.toView(view)
     }
 }
